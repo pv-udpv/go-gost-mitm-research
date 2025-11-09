@@ -1,0 +1,9 @@
+[submodule "modules/gost"]
+	path = modules/gost
+	url = https://github.com/go-gost/gost.git
+	branch = master
+
+[submodule "modules/x"]
+	path = modules/x
+	url = https://github.com/pv-udpv/go-gost-x.git
+	branch = main
