@@ -10,6 +10,8 @@ Research repository for GOST proxy with JA3/JA4 TLS fingerprinting and browser p
 - Proxy chain configurations for various use cases
 - Performance benchmarking and optimization
 
+##  Known issues
+- TLS 1.3<->1.2 changing меняет отпечаток, а у нас это не учтено
 ## ⚡ Quick Start
 
 ```bash
