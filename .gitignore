@@ -1,0 +1,79 @@
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go
+*.test
+*.out
+go.work
+
+# Build artifacts
+build/
+dist/
+
+# Dependencies
+vendor/
+modules/*/vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Certificates and keys
+certs/*.crt
+certs/*.key
+certs/*.pem
+certs/*.p12
+certs/*.pfx
+!certs/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Configuration
+configs/production.yml
+configs/*.local.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.pytest_cache/
+.coverage
+.hypothesis/
+
+# Research data
+research/results/*.json
+research/results/*.csv
+research/benchmarks/results/*
+!research/benchmarks/results/.gitkeep
+
+# Profiles
+profiles/custom-profiles/*.json
+!profiles/custom-profiles/README.md
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+.cache/
