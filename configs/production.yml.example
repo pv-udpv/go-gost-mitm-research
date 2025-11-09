@@ -1,0 +1,40 @@
+# Production MITM Proxy Configuration Example
+# Copy to production.yml and customize
+
+log:
+  level: info
+  format: json
+  output: /var/log/gost/production.log
+
+api:
+  addr: :18080
+  accesslog: true
+  auth:
+    username: admin
+    password: changeme
+
+services:
+  - name: mitm-production
+    addr: :8080
+    handler:
+      type: http
+      chain: chain-0
+      metadata:
+        mitm.certFile: /etc/gost/certs/ca.crt
+        mitm.keyFile: /etc/gost/certs/ca.key
+        enableStats: true
+    listener:
+      type: tcp
+
+chains:
+  - name: chain-0
+    hops:
+      - name: hop-0
+        nodes:
+          - name: upstream
+            connector:
+              type: http
+            dialer:
+              type: tls
+              metadata:
+                browserProfile: chrome_modern

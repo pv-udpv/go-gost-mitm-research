@@ -1,0 +1,52 @@
+# MITM Proxy with Chrome TLS Fingerprint
+log:
+  level: info
+  format: json
+  output: /var/log/gost/mitm-chrome.log
+
+api:
+  addr: :18080
+  accesslog: true
+
+services:
+  - name: mitm-chrome-8080
+    addr: :8080
+    handler:
+      type: http
+      chain: chain-chrome
+      metadata:
+        mitm.certFile: certs/ca.crt
+        mitm.keyFile: certs/ca.key
+        mitm.validity: 8760h
+        enableStats: true
+    listener:
+      type: tcp
+      metadata:
+        keepAlive: true
+        keepAlivePeriod: 30s
+        readTimeout: 60s
+        writeTimeout: 60s
+
+chains:
+  - name: chain-chrome
+    hops:
+      - name: upstream-hop
+        nodes:
+          - name: direct-with-chrome-fingerprint
+            connector:
+              type: http
+              metadata:
+                http2: true
+            dialer:
+              type: tls
+              metadata:
+                browserProfile: chrome_modern
+                serverName: ""
+                alpn:
+                  - h2
+                  - http/1.1
+                keepAlive: true
+                keepAlivePeriod: 30s
+                timeout: 30s
+                minVersion: "1.2"
+                maxVersion: "1.3"
